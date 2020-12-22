@@ -1,0 +1,127 @@
+
+import java.util.Scanner;// Import the scanner
+
+public class SciCalculator {
+
+    public static void main(String[] args) {
+        // Initialize variables
+        double operandOne = 0.0;
+        double operandTwo = 0.0;
+        double currentResult = 0.0; //value of one calculation
+        double calcSum = 0.0; // Sum of all calculations. Needed for Option 7
+        double calcAverage = 0.0; // Average of calculations. Needed for Option 7
+        int numCalc = 0; // Number of calculations. Needed for Option 7
+        int userSelection = 0; // The option the user choose from Calc menu
+        //double firstExpoNum = 0;
+        //double secondExpoNum = 0;
+
+        Scanner scanner = new Scanner(System.in); //Declaration of the scanner
+
+            System.out.print("Current Result: " + currentResult + "\n");
+
+            boolean firstCalculation = true;
+            while (firstCalculation) {
+
+                //Calculator menu
+                if (!(userSelection == 7)){
+                    System.out.println("\nCalculator Menu \n" + "--------------- \n" + "0. Exit Program \n" + "1. Addition \n" + "2. Subtraction \n"
+                            + "3. Multiplication \n" + "4. Division \n" + "5. Exponentiation \n" + "6. Logarithm \n" + "7. Display Average \n");
+                }
+
+                System.out.print("Enter Menu Selection:\n");
+                userSelection = scanner.nextInt();
+
+                if (userSelection < 0 || userSelection > 9){ //if the selection isn't between 0 and 9 then print a error message and redirect user
+                    System.out.println("Error: Invalid selection!\n");
+                    System.out.print("Enter Menu Selection:");
+                    userSelection = scanner.nextInt();
+                }
+
+
+                if (userSelection != 0 && userSelection != 7) { //if user input 1-6 then the following will pop up on their screen for input
+                    System.out.print("Enter first operand: ");
+                    String stringOperandOne = scanner.next();
+                    if (stringOperandOne.equals("RESULT")) { //if user enter "RESULT then previous calculation will be used for operandOne
+                        operandOne = currentResult;
+                    }
+                    else {
+                        operandOne = Double.parseDouble(stringOperandOne);
+                    }
+                    System.out.print("Enter second operand: ");
+                    String stringOperandTwo = scanner.next();
+                    if (stringOperandTwo.equals("RESULT")){ //if user enter "RESULT then previous calculation will be used for operandTwo
+                        operandTwo = currentResult;
+                    }
+                    else {
+                        operandTwo = Double.parseDouble(stringOperandTwo);
+                    }
+                }
+
+
+                if (userSelection == 0) {
+                    System.out.println("Thanks for using this calculator. Goodbye!");
+                    break;
+
+                } else if (userSelection == 1) { //addition option
+                    currentResult = (operandOne + operandTwo);
+                    System.out.println("Current Result: " + currentResult);
+                    numCalc++;
+                    calcSum = calcSum + currentResult;
+
+                } else if (userSelection == 2) { //subtraction option
+                    currentResult = operandOne - operandTwo;
+                    System.out.println("Current Result: " + currentResult);
+                    numCalc++;
+                    calcSum = calcSum + currentResult;
+
+                } else if (userSelection == 3) { //multiplication option
+                    currentResult = operandOne * operandTwo;
+                    System.out.println("Current Result: " + currentResult);
+                    numCalc++;
+                    calcSum = calcSum + currentResult;
+
+                } else if (userSelection == 4) { //division option
+                    currentResult = operandOne / operandTwo;
+                    System.out.println("Current Result: " + currentResult);
+                    numCalc++;
+                    calcSum = currentResult;
+
+                } else if (userSelection == 5) { //exponentiation option
+                     currentResult = Math.pow(operandOne, operandTwo);
+                    System.out.println("Current Result: " + currentResult);
+                    numCalc++;
+                    calcSum = calcSum + currentResult;
+
+                } else if (userSelection == 6) { //log option
+                    currentResult = Math.log(operandTwo) / Math.log(operandOne);
+                    System.out.println("Current Result: " + currentResult);
+                    numCalc++;
+                    calcSum = calcSum + currentResult;
+                }
+                else if (userSelection == 7) { //display average
+                    if (currentResult == 0) {
+                        System.out.println("Error: No calculations yet to average!");
+                        //continue;
+                    } else {
+                        System.out.println("Sum of calculations: " + calcSum);
+                        System.out.println("Number of calculations: " + numCalc);
+                        calcAverage = (Math.round((calcSum / numCalc)*100)) / 100.0;
+                        System.out.println("Average of calculations: " + calcAverage);
+                    }
+                }
+
+
+            }
+
+    }
+
+
+
+
+
+
+
+
+
+    }
+
